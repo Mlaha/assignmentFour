@@ -13,34 +13,31 @@
 def is_valid_mark(mark):
     return 0 <= mark <= 100
 
-# Function to get the grade based on the average marks
+
 def get_grade(average):
-    if average < 0 or average > 100:
+    if not is_valid_mark(average):
         return "Unrecognized marks / avg"
-    elif 0 <= average <= 30:
+    elif average <= 30:
         return "D"
-    elif 31 <= average <= 50:
+    elif average <= 50:
         return "C"
-    elif 51 <= average <= 70:
+    elif average <= 70:
         return "B"
-    elif 71 <= average <= 100:
+    elif average <= 100:
         return "A"
 
-# Input marks for four subjects
-maths = float(input("Enter the marks for Mathematics: "))
-chemistry = float(input("Enter the marks for Chemistry: "))
-biology = float(input("Enter the marks for Biology: "))
-physics = float(input("Enter the marks for Physics: "))
+marks = []
 
-# Check if all marks are valid
-if is_valid_mark(maths) and is_valid_mark(chemistry) and is_valid_mark(biology) and is_valid_mark(physics):
-    # Calculate the average
-    average = (maths + chemistry + biology + physics) / 4
+subjects = ["Mathematics", "Chemistry", "Biology", "Physics"]
 
-    # Get the grade based on the average
-    grade = get_grade(average)
+for subject in subjects:
+    mark = float(input(f"Enter the marks for {subject}: "))
+    if not is_valid_mark(mark):
+        print("Unrecognized marks / avg")
+        break
+    marks.append(mark)
 
-    # Print the grade
-    print(f"The average grade is: {grade}")
 else:
-    print("Unrecognized marks / avg")
+    average = sum(marks) / len(marks)
+    grade = get_grade(average)
+    print(f"The average grade is: {grade}")
